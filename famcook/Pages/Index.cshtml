@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<h4>Recipe</h4>
+<hr />
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @{
+            var first = true;
+        }
+        @foreach (var item in @Model.ViewBag)
+        {
+            <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
+                <a asp-page="Recipes/Details" asp-route-id="@item.ID">
+                    <img class="d-block w-100" src="@Url.Content("~/" + System.IO.Path.GetFileName(item.ImageName))" alt="@item.RecipeName">
+                </a>
+                <div class="carousel-caption">
+                    <h1 class="carousel-text">@item.RecipeName</h1>
+                </div>
+            </div>
+
+            first = false;
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+       data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+       data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+   <div class="container">
+        <div class="row">
+            @foreach (var recipe in @Model.RecipeList)
+            {
+                <div class="col-lg-4 d-flex">
+                    <div class="card mb-2 shadow-sm">
+                        <a asp-page="/Recipes/Details" asp-route-id="@recipe.ID"><img class="img-fluid card-img-top" src="@Url.Content("~/" + System.IO.Path.GetFileName(recipe.ImageName))" alt="View" /></a>
+                        <hr />
+                        <h2 class="card-title">@recipe.RecipeName</h2>
+                        <p class="card-text">@recipe.FoodCat @recipe.PrepTime</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+@*<div class="card-group">
+        @foreach (var recipe in Model.RecipeList)
+        {
+            <div class="card">
+                <a asp-page="/Recipes/Details" asp-route-id="@recipe.ID"><img class="img-fluid text-center" src="@Url.Content("~/" + System.IO.Path.GetFileName(recipe.ImageName))" alt="View" /></a>
+                <div class="card-body">
+                    <h5 class="card-title">@recipe.RecipeName</h5>
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+*@

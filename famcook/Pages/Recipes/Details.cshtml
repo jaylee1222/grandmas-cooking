@@ -1,0 +1,27 @@
+﻿@page
+@model famcook.Pages.Recipes.DetailsModel
+@{
+}
+
+
+<div>
+    <h1>@Model.Recipe.RecipeName</h1>
+    <h3>Prep Time: @Model.Recipe.PrepTime</h3>
+    <img src="@Url.Content("~/" + System.IO.Path.GetFileName(Model.Recipe.ImageName))" />
+    <hr />
+    <h3>Instructions</h3>
+    <ul>
+        @foreach (var item in Model.Recipe.Ingredients)
+        {
+            <li>@item</li>
+        }
+    </ul>
+    <hr />
+    <h3>Instructions</h3>
+     <ol>
+        @foreach (var item in Model.Recipe.Instructions)
+        {
+            <li>@item</li>
+        }
+     </ol>
+</div>

@@ -1,0 +1,16 @@
+﻿@page
+@model famcook.Pages.Recipes.IndexModel
+@{
+}
+
+    <div>
+        <h4>Recipe</h4>
+        <hr />
+                @foreach (var recipe in @Model.RecipeList)
+                {
+                    <a asp-page="./Details" asp-route-id="@recipe.ID"><img src="@Url.Content("~/" + System.IO.Path.GetFileName(recipe.ImageName))" alt="View" /></a>
+                    <br />
+                    <h2>@recipe.RecipeName</h2>
+                    <p>@recipe.FoodCat @recipe.PrepTime</p>
+                }
+    </div>

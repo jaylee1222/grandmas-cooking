@@ -1,0 +1,10 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
+
+.carousel-item img {
+    height: 600px;
+}
+
+.carousel-caption h1 {
+    color: black;
+    font-family: 'Hind', sans-serif;
+}

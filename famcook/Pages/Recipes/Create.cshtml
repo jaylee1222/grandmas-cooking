@@ -1,0 +1,89 @@
+﻿@page
+@model famcook.Pages.Recipes.CreateModel
+@{
+}
+
+<h4>Save a Recipe</h4>
+
+<form enctype="multipart/form-data" method="post" id="recipe_form">
+    <div class="form-group">
+        <label asp-for="Recipe.RecipeName"></label>
+        <input class="form-control" type="text" asp-for="Recipe.RecipeName" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Recipe.PrepTime"></label>
+        <input class="form-control" type="text" asp-for="Recipe.PrepTime" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Recipe.FoodCat"></label>
+        <select class="form-control" asp-for="Recipe.FoodCat">
+            <option value="Appetizers">Appetizers</option>
+            <option value="Beef">Beef</option>
+            <option value="Breads">Breads</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Entrees">Entrees</option>
+            <option value="Fish">Fish</option>
+            <option value="Pasta">Pasta</option>
+            <option value="Pork">Pork</option>
+            <option value="Poultry">Poultry</option>
+            <option value="Sides">Sides</option>
+            <option value="Soups">Soups</option>
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Recipe.Ingredients"></label>
+        <input class="ingredient_div form-control" type="text" asp-for="Recipe.Ingredients" />
+        <input type="button" class="btn btn-primary" value="Add ingredient" onclick="add_ingredients()">
+    </div>
+    <br />
+    <div id="instruction_div form-group">
+        <label asp-for="Recipe.Instructions"></label>
+        <textarea class="form-control" asp-for="Instruction" id="exampleFormControlTextarea3" rows="7"></textarea>
+    </div>
+    <br />
+    <div class="form-group">
+        <label>Image</label>
+        <input class="form-control-file" type="file" asp-for="Image" />
+        <span asp-validation-for="Image"></span>
+    </div>
+    <br />
+    <button id="submitbutton" class="btn btn-primary" type="submit" onclick="clearform();" value="SaveRecipe" asp-page-handler="SaveRecipe">Save Recipe</button>
+</form>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Your recipe has been submitted! Return to your profile to see your recipe.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>var counter = 1;
+    var limit = 15;
+    function add_ingredients() {
+        if (counter == limit) {
+            alert("You cannot add anymore ingredients only " + counter + " allowed.");
+        }
+        else {
+            var newingredient = document.createElement('div');
+            var instruction_div = document.getElementById("instruction_div form-group")
+            newingredient.innerHTML = "<label>Ingredient</label> \n <input class='form-control' type='text' id = 'Recipe_Ingredients' name='Recipe.Ingredients' > ";
+            document.getElementById("recipe_form").insertBefore(newingredient, instruction_div);
+            counter++;
+        }
+    }</script>
